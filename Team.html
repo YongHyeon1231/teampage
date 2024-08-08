@@ -67,16 +67,22 @@
         }
 
         .mycards {
-            width: 1880px;
+            width: 1700px;
             border-style: solid;
             border-color: black;
             border-spacing: 50px;
-            height: 1000px;
+            height: 700px;
             padding-top: 75px;
             padding-left: 20px;
-            margin-left: 500px;
+            margin-left: 100px;
             margin-top: 100px;
             overflow:auto; 
+        }
+
+        .mycards img {
+            display:block;
+            width: 100%;
+            height: auto;
         }
     </style>
 
@@ -128,9 +134,6 @@
                         <h5 class="card-title">이름: ${name}</h5>
                         <p class="card-text">한줄 소개: ${comment}</p>
                     </div>
-                    <div class="card-footer">
-                        <small class="text-body-secondary">등록 날짜</small>
-                    </div>
                 </div>
             </div>`;
             $('#card').append(temp_html);
@@ -163,8 +166,8 @@
 
             <!--Login and Sign-up-->
             <nav class="navbar-Sign">
-                <li><button type="button" class="btn btn-outline-primary me-2">Login</button></li>
-                <li><button type="button" class="btn btn-primary">Sign-up</button></li>
+                <li><a href="Login.html"><button type="button" class="btn btn-outline-primary me-2">Login</button></a></li>
+                <li><a href="SignUp.html"><button type="button" class="btn btn-primary">Sign-up</button></a></li>
                 <div class="box">
                     <img class="profile" src="src/user.png" alt="src/user.png">
                 </div>
