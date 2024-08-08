@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TeamPage</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap');
+
+        .gowun-dodum-regular {
+            font-family: "Gowun Dodum", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        header {
+            margin: 0;
+            background-color: rgb(179, 203, 247);
+            padding: 8px 20px;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar-menu {
+            display: flex;
+            list-style: none;
+            padding-right: 300px;
+        }
+
+        .navbar-menu li:hover {
+            size: 100px;
+            background-color: rgb(39, 125, 175);
+            border-radius: 4px;
+        }
+
+        .navbar-menu li {
+            padding: 8px 20px
+        }
+
+        .navbar-Sign {
+            display: flex;
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .box {
+            width: 50px;
+            height: 50px;
+            border-radius: 70%;
+            border-style: solid;
+            overflow: hidden;
+            border-color: black;
+        }
+
+        .profile {
+            width: 100%;
+            height: 100%;
+            object-fit: cover
+        }
+
+        .navbar-Sign li {
+            padding: 8px 15px;
+        }
+
+        .mytitle {
+            height: 250px;
+            color: white;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            background-image: url('https://images.unsplash.com/photo-1511992243105-2992b3fd0410?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
+            background-position: center;
+            background-size: cover;
+        }
+
+        .mytitle>button {
+            width: 150px;
+            height: 50px;
+            background-color: transparent;
+            color: white;
+            border: 1px solid white;
+            border-radius: 5px;
+
+            margin-top: 20px;
+        }
+
+        .mypostingbox {
+            width: 950px;
+            margin: 30px auto 0px auto;
+            padding: 20px;
+            box-shadow: 0px 0px 3px 0px blue;
+            border-radius: 5px;
+        }
+
+        .mybtn {
+            display: flex;
+            flex-direction: row;
+            align-items: right;
+            justify-content: right;
+            margin-right: 40px;
+        }
+
+        .mybtn>button {
+            margin-right: 5px;
+            margin-inline-start: 1rem;
+        }
+
+        .mypostingbox #image {
+            width: 225px;
+            height: 300px;
+        }
+
+        .threeRow div {
+            margin-left: 20px;
+        }
+
+        .firstline div {
+            display: inline-block;
+            width: 300px;
+        }
+
+        .secondline div {
+            display: inline-block;
+            width: 300px;
+        }
+
+        .thirdline div {
+            display: inline-block;
+            width: 300px;
+        }
+
+        .fourthline div {
+            display: inline-block;
+            width: 300px;
+        }
+    </style>
+
+    <script type="module">
+        // Firebase SDK 라이브러리 가져오기
+        import { getFirestore } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+        import { collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+        import { getDocs } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-analytics.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyBhvKJ8O13ivyK7WWYIN1vjKRI4F62J9ks",
+            authDomain: "teampage-76865.firebaseapp.com",
+            projectId: "teampage-76865",
+            storageBucket: "teampage-76865.appspot.com",
+            messagingSenderId: "880930432758",
+            appId: "1:880930432758:web:b9d3b734c637de6a306ed7",
+            measurementId: "G-04VQ5L1YF1"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const db = getFirestore(app);
+
+        $("#postingbtn").click(async function () {
+            let image = $('#image').val();
+            let name = $('#name').val();
+            let content = $('#content').val();
+            let ability = $('#ability').val();
+            let game = $('#game').val();
+            let partnership = $('#partnership').val();
+            let comment = $('#comment').val();
+            let github_addr = $('#github_addr').val();
+            let blog_addr = $('#blog_addr').val();
+            let doc = {
+                'image': image,
+                'name': name,
+                'content': content,
+                'ability': ability,
+                'game': game,
+                'partnership': partnership,
+                'comment': comment,
+                'github_addr': github_addr,
+                'blog_addr': blog_addr,
+            };
+            await addDoc(collection(db, "Info"), doc);
+            alert('저장 완료!');
+            window.location.reload();
+        })
+
+        $("#savebtn").click(function () {
+            $('#postingbox').toggle();
+        })
+
+    </script>
+    <script>
+        function setThumbnail(event) {
+            var reader = new FileReader();
+
+            reader.onload = function (event) {
+                var img = document.createElement("img");
+                img.setAttribute("src", event.target.result);
+                document.querySelector("div#image_container").appendChild(img);
+            };
+
+            reader.readAsDataURL(event.target.files[0]);
+        }
+    </script>
+</head>
+
+<body>
+    <!-- Header -->
+    <div class="header-container">
+        <header
+            class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+            <div class="col-md-3 mb-2 mb-md-0">
+                <a href="/" class="d-inline-flex link-body-emphasis text-decoration-none">
+                    <svg class="bi" width="40" height="32" role="img" aria-label="Bootstrap">
+                        <use xlink:href="#bootstrap"></use>
+                    </svg>
+                </a>
+            </div>
+
+            <!--Menu-->
+            <nav class="navbar-menu">
+                <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+                    <li><a href="HomPage.html" class="nav-link px-2 link-secondary">HOME</a></li>
+                    <li><a href="Team.html" class="nav-link px-2">TEAM</a></li>
+                    <li><a href="Members.html" class="nav-link px-2">MEMBERS</a></li>
+                    <li><a href="Join.html" class="nav-link px-2" style="color : hsl(0, 96%, 68%)">JOIN</a></li>
+                </ul>
+            </nav>
+
+            <!--Login and Sign-up-->
+            <nav class="navbar-Sign">
+                <li><button type="button" class="btn btn-outline-primary me-2">Login</button></li>
+                <li><button type="button" class="btn btn-primary">Sign-up</button></li>
+                <div class="box">
+                    <img class="profile" src="src/user.png" alt="src/user.png">
+                </div>
+            </nav>
+        </header>
+    </div>
+
+    <!--Join 추가-->
+    <div class="mytitle">
+        <h1>슈퍼I들의 앨범</h1>
+        <button id="savebtn">추억 저장하기</button>
+    </div>
+    <div class="mypostingbox" id="postingbox">
+        <nav class="threeRow">
+            <div class="form-floating mb-3" style="float: left">
+                <input type="email" class="form-control" id="image" placeholder="사진 이미지" accept="image/*"
+                    onchange="setThumbnail(event)">
+                <label for="floatingInput">사진 이미지</label>
+                <div id="image_container"></div>
+            </div>
+
+            <nav class="firstline">
+                <div class="form-floating mb-3">
+                    <input type="email" class="form-control" id="name" placeholder="이름">
+                    <label for="floatingInput">이름</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input type="email" class="form-control" id="content" placeholder="MBTI">
+                    <label for="floatingInput">MBTI</label>
+                </div>
+            </nav>
+
+            <nav class="secondline">
+                <div class="form-floating mb-3">
+                    <input type="email" class="form-control" id="ability" placeholder="장점">
+                    <label for="floatingInput">장점</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="email" class="form-control" id="game" placeholder="좋아하는 게임">
+                    <label for="floatingInput">좋아하는 게임</label>
+                </div>
+            </nav>
+
+            <nav class="thirdline">
+                <div class="form-floating mb-3">
+                    <input type="email" class="form-control" id="partnership" placeholder="협업스타일">
+                    <label for="floatingInput">협업스타일</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="email" class="form-control" id="comment" placeholder="자기 소개">
+                    <label for="floatingInput">자기 소개</label>
+                </div>
+            </nav>
+
+            <nav class="fourthline">
+                <div class="form-floating mb-3">
+                    <input type="email" class="form-control" id="github_addr" placeholder="깃허브">
+                    <label for="floatingInput">깃허브</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="email" class="form-control" id="blog_addr" placeholder="블로그">
+                    <label for="floatingInput">블로그</label>
+                </div>
+            </nav>
+        </nav>
+
+        <div class="mybtn">
+            <button type="button" class="btn btn-dark" id="postingbtn">기록하기</button>
+            <button type="button" class="btn btn-outline-dark">닫기</button>
+        </div>
+    </div>
+
+</body>
+
+</html>

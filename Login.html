@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+</head>
+
+<body>
+    <div>
+        <h1>로그인</h1>
+        <div>email: <input type="email" id="signInEmail" /></div>
+        <div>password: <input type="password" id="signInPassword" /></div>
+        <button type="submit" id="signInButton">로그인 하기</button>
+        <a href="SignUp.html"><button>회원가입 하러 가기</button></a>
+    </div>
+
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-analytics.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+            apiKey: "AIzaSyBhvKJ8O13ivyK7WWYIN1vjKRI4F62J9ks",
+            authDomain: "teampage-76865.firebaseapp.com",
+            projectId: "teampage-76865",
+            storageBucket: "teampage-76865.appspot.com",
+            messagingSenderId: "880930432758",
+            appId: "1:880930432758:web:b9d3b734c637de6a306ed7",
+            measurementId: "G-04VQ5L1YF1"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
+
+        const auth = getAuth();
+
+        // 로그인 버튼을 눌렀을 때 이미 저장되어 있는 정보들을 통해 로그인 되게
+        document.getElementById('signInButton').addEventListener('click', (event) => {
+            event.preventDefault();
+            const signInEmail = document.getElementById('signInEmail').value;
+            const signInPassword = document.getElementById('signInPassword').value;
+            signInWithEmailAndPassword(auth, signInEmail, signInPassword)
+                .then((userCredential) => {
+                    alert("로그인 성공");
+                    // Signed in 
+                    console.log(userCredential);
+                    const user = userCredential.user;
+                    // ...
+                    location.href = "HomePage.html";
+                })
+                .catch((error) => {
+                    alert('로그인 실패')
+                    console.log('로그인 실패');
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                });
+        })
+    </script>
+</body>
+
+</html>
