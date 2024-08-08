@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HomeTeamPage</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap');
+
+        .gowun-dodum-regular {
+            font-family: "Gowun Dodum", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        header {
+            margin: 0;
+            background-color: rgb(179, 203, 247);
+            padding: 8px 20px;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar-menu {
+            display: flex;
+            list-style: none;
+            padding-right: 300px;
+        }
+
+        .navbar-menu li:hover {
+            size: 100px;
+            background-color: rgb(39, 125, 175);
+            border-radius: 4px;
+        }
+
+        .navbar-menu li {
+            padding: 8px 20px
+        }
+
+        .navbar-Sign {
+            display: flex;
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .box {
+            width: 50px;
+            height: 50px;
+            border-radius: 70%;
+            border-style: solid;
+            overflow: hidden;
+            border-color: black;
+        }
+
+        .profile {
+            width: 100%;
+            height: 100%;
+            object-fit: cover
+        }
+
+        .navbar-Sign li {
+            padding: 8px 15px;
+        }
+
+        .mycards {
+            width: 1880px;
+            border-style: solid;
+            border-color: black;
+            border-spacing: 50px;
+            height: 1000px;
+            padding-top: 75px;
+            padding-left: 20px;
+            margin-left: 500px;
+            margin-top: 100px;
+            overflow:auto; 
+        }
+    </style>
+
+    <script type="module">
+        // Firebase SDK 라이브러리 가져오기
+        import { getFirestore } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+        import { collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+        import { getDocs } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-analytics.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyBhvKJ8O13ivyK7WWYIN1vjKRI4F62J9ks",
+            authDomain: "teampage-76865.firebaseapp.com",
+            projectId: "teampage-76865",
+            storageBucket: "teampage-76865.appspot.com",
+            messagingSenderId: "880930432758",
+            appId: "1:880930432758:web:b9d3b734c637de6a306ed7",
+            measurementId: "G-04VQ5L1YF1"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const db = getFirestore(app);
+
+        let docs = await getDocs(collection(db, "Info"));
+        docs.forEach((doc) => {
+            let row = doc.data();
+            console.log(row);
+            let image = row['image'];
+            let name = row['name'];
+            let content = row['content'];
+            let ability = row['ability'];
+            let game = row['game'];
+            let partnership = row['partnership'];
+            let comment = row['comment'];
+            let github_addr = row['github_addr'];
+            let blog_addr = row['blog_addr'];
+            let temp_html =
+                `<div class="col">
+                <div class="card h-100">
+                    <img src="${image}"
+                        class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">이름: ${name}</h5>
+                        <p class="card-text">한줄 소개: ${comment}</p>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-body-secondary">등록 날짜</small>
+                    </div>
+                </div>
+            </div>`;
+            $('#card').append(temp_html);
+        });
+
+    </script>
+</head>
+
+<body>
+    <!-- Header -->
+    <div class="header-container">
+        <header
+            class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+            <div class="col-md-3 mb-2 mb-md-0">
+                <a href="/" class="d-inline-flex link-body-emphasis text-decoration-none">
+                    <svg class="bi" width="40" height="32" role="img" aria-label="Bootstrap">
+                        <use xlink:href="#bootstrap"></use>
+                    </svg>
+                </a>
+            </div>
+
+            <!--Menu-->
+            <nav class="navbar-menu">
+                <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+                    <li><a href="HomePage.html" class="nav-link px-2 link-secondary">HOME</a></li>
+                    <li><a href="HomeTeam.html" class="nav-link px-2" style="color : hsl(0, 96%, 68%)">TEAM</a></li>
+                    <li><a href="HomeMembers.html" class="nav-link px-2">MEMBERS</a></li>
+                    <li><a href="HomeJoin.html" class="nav-link px-2">JOIN</a></li>
+                </ul>
+            </nav>
+
+            <!--Login and Sign-up-->
+            <nav class="navbar-Sign">
+                <li><button type="button" class="btn btn-outline-primary me-2">Login</button></li>
+                <li><button type="button" class="btn btn-primary">Sign-up</button></li>
+                <div class="box">
+                    <img class="profile" src="src/user.png" alt="src/user.png">
+                </div>
+            </nav>
+        </header>
+    </div>
+
+    <div class="mycards">
+        <div id="card" class="row row-cols-1 row-cols-md-4 g-4">
+            
+        </div>
+    </div>
+</body>
+
+</html>

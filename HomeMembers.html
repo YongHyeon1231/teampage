@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>index</title>
+    <title>HomeTeamPage</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
@@ -64,6 +64,23 @@
 
         .navbar-Sign li {
             padding: 8px 15px;
+        }
+
+        .slider {
+            width: 1580px;
+            border-spacing: 50px;
+            height: 650px;
+            padding-top: 75px;
+            padding-left: 20px;
+            margin-left: 175px;
+            margin-top: 100px;
+            margin-right: 200px;
+        }
+
+        .card {
+            width: 1200px;
+            height: 500px;
+            margin-left: 175px;
         }
 
         .postcard div {
@@ -147,8 +164,7 @@
             let github_addr = row['github_addr'];
             let blog_addr = row['blog_addr'];
             let temp_html =
-                `
-                <div  class="carousel-item active">
+                `<div  class="carousel-item active">
                 <div class="card">
                         <nav class="postcard">
                             <div class="image">
@@ -181,10 +197,10 @@
                             </div>
                         </nav>
                     </div>
-                    </div>
-                `;
+                    </div>`;
             $('#inputcard').append(temp_html);
         });
+
     </script>
 </head>
 
@@ -204,17 +220,17 @@
             <!--Menu-->
             <nav class="navbar-menu">
                 <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-                    <li><a href="HomPage.html" class="nav-link px-2 link-secondary">HOME</a></li>
-                    <li><a href="Team.html" class="nav-link px-2">TEAM</a></li>
-                    <li><a href="Members.html" class="nav-link px-2">MEMBERS</a></li>
-                    <!--<li><a href="Join.html" class="nav-link px-2">JOIN</a></li>-->
+                    <li><a href="HomePage.html" class="nav-link px-2 link-secondary">HOME</a></li>
+                    <li><a href="HomeTeam.html" class="nav-link px-2">TEAM</a></li>
+                    <li><a href="HomeMembers.html" class="nav-link px-2" style="color : hsl(0, 96%, 68%)">MEMBERS</a></li>
+                    <li><a href="Join.html" class="nav-link px-2">JOIN</a></li>
                 </ul>
             </nav>
 
             <!--Login and Sign-up-->
             <nav class="navbar-Sign">
-                <li><a href="Login.html"><button type="button" class="btn btn-outline-primary me-2">Login</button></a></li>
-                <li><a href="SignUp.html"><button type="button" class="btn btn-primary">Sign-up</button></a></li>
+                <li><button type="button" class="btn btn-outline-primary me-2">Login</button></li>
+                <li><button type="button" class="btn btn-primary">Sign-up</button></li>
                 <div class="box">
                     <img class="profile" src="src/user.png" alt="src/user.png">
                 </div>
@@ -222,46 +238,29 @@
         </header>
     </div>
 
-    <!--Slider Carousel-->
-    <section class="container">
-        <div id="carouselExampleIndicators" class="carousel slide carousel-dark m-auto" data-bs-ride="carousel">
-            <div class="carousel-indicators">
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
-                    aria-current="true" aria-label="Slide 1"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
-                    aria-label="Slide 2"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
-                    aria-label="Slide 3"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3"
-                    aria-label="Slide 4"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="4"
-                    aria-label="Slide 5"></button>
-            </div>
-            <div class="carousel-inner" id="inputcard">
+    <!--Slider 캐러셀-->
+    <div class="slider" style="background-color: rgb(58, 55, 55);">
+        <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+            <div id="inputcard" class="carousel-inner">
+                
 
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
                 data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Previous</span>
             </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
                 data-bs-slide="next">
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Next</span>
             </button>
         </div>
-    </section>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
         crossorigin="anonymous"></script>
-    <script>
-        var myCarouselElement = document.querySelector('#carouselExampleIndicators');
-        var myCarousel = new bootstrap.Carousel(myCarouselElement, {
-            interval: 3000 // 1000 = 1초
-        });
-    </script>
 </body>
 
 </html>
